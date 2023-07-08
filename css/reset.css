@@ -45,6 +45,7 @@ body
 }
 nav
 {
+  position: relative;
   width: 100vw;
   opacity: 0;
   display: flex;
@@ -88,7 +89,7 @@ nav:hover
   border-bottom: solid 1px white;
 }
 
-input, textarea
+input, textarea, select
 {
   background-color: rgba(198, 198, 198, 0.08);
   border: solid 0px;
@@ -99,7 +100,7 @@ input, textarea
   transform: translate(0, -10px);
   color: var(--primary-text-color);
   transition: all 0.7s ease;
-  padding-left: 10px;
+  padding-left: 13px;
 }
 
 input:focus, textarea:focus

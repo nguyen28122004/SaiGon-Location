@@ -1,0 +1,80 @@
+.contain_box
+{
+    display: flex;
+    flex-direction: column;
+    width: 70vh;
+    position: absolute;
+    left: 50vw;
+    top: 10vh;
+    transform: translate(-50%, 0);
+}
+
+.info-box
+{
+    cursor:auto;
+}
+input, select
+{
+    background: rgba(255, 255, 255, 0.15);
+    font-size: 1rem;
+}
+
+div[type-box="input"]
+{
+    display: flex;
+    flex-direction: column;
+}
+
+textarea
+{
+    background: rgba(255, 255, 255, 0.15);
+    resize: none;
+    height: 40vh !important;
+    padding: 13px;
+    font-size: 1rem;
+}
+
+.submit-box
+{
+    width: 100px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.15);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: content-box;
+    border-radius: 10px;
+    transition: 0.5s;
+    margin-left: auto;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.submit-box:hover
+{
+    background-color: rgba(0,0,0,0.3);
+    transition: 0.5s;
+}
+
+.search-container
+{
+  position: relative;
+  width: 100%;
+  top:initial;
+  left: initial;
+  display: flex-box;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.fa-solid.fa-trash
+{
+    fill: #fff;
+    display: inline-block;
+    position: relative;
+    margin-left: auto;
+    background: none;
+    cursor: pointer;
+}
