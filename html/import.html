@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONTACT</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/import.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script crossorigin  type="module" src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin type="module" src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+</head>
+<body>
+<div class="main" style="display: flexbox;flex-direction: column;">
+    <nav style="opacity: 1;">
+        <div class="nav-links">
+            <ul>
+                <li><a href=".././index.html">HOME</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="contain_box">
+        <div class="category" type-box="input">
+            <p><b>Danh mục</b></p>
+            <select id="category">
+                <option value="place">Du lịch</option>
+                <option value="food">Ăn uống</option>
+            </select>
+        </div>
+        <div class="name-data" type-box="input">
+            <p><b>Tên địa điểm</b></p>
+            <input type="text" id="name">
+        </div>
+        <div class="address-data" type-box="input">
+            <p><b>Địa chỉ</b></p>
+            <input type="text" id="address">
+        </div>
+        <div class="rate-data" type-box="input">
+            <p><b>Xếp hạng(1.0 - 5.0)</b></p>
+            <input type="text" id="rate">
+        </div>
+        <div class="description-data" type-box="input">
+            <p><b>Mô tả</b></p>
+            <textarea id="description" cols="30" rows="10"></textarea>
+        </div>
+        <div class="bgLink-data" type-box="input">
+            <p><b>URL ảnh nền</b></p>
+            <input type="text" id="bgLink">
+        </div>
+        <div class="submit-box">Submit</div>
+        <div class="devider" style="background-color: #fff;height:1px;margin-top: 10px; margin-bottom: 20px;"></div>
+        <div class="search-container">
+        </div>
+    </div>
+
+    
+</div>
+<script type="module" src="../js/import.js"></script>
+</body>
+</html>
+
+
