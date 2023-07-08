@@ -3,24 +3,63 @@ var idPos = curURL.search("id=")
 console.log(idPos)
 var tmp = Number(curURL.slice(idPos + 3, curURL.length))
 var count = 0
-if (!isNaN(tmp))
-    count = tmp - 4;
 
 
-function loadFile(filePath) {
-    var result = null;
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", filePath, false);
-    xmlhttp.send();
-    if (xmlhttp.status==200) {
-      result = xmlhttp.responseText;
-    }
-    return result;
+
+// function loadFile(filePath) {
+//     var result = null;
+//     var xmlhttp = new XMLHttpRequest();
+//     xmlhttp.open("GET", filePath, false);
+//     xmlhttp.send();
+//     if (xmlhttp.status==200) {
+//       result = xmlhttp.responseText;
+//     }
+//     return result;
+// }
+
+// var dataString = loadFile("../json/database.json")
+
+// var database = JSON.parse(dataString)
+
+
+
+//==================================================
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js";
+import { getDatabase, ref, set, onValue, get, child } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-database.js";
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAtwPhCdCQLf2TVE0AmsI6LJA5DOsch8Qo",
+    authDomain: "saigon-location.firebaseapp.com",
+    projectId: "saigon-location",
+    storageBucket: "saigon-location.appspot.com",
+    messagingSenderId: "297373622656",
+    appId: "1:297373622656:web:ffdc04efb1039220ab2165"
+  };
+
+// Initialize Firebase
+var app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const dbRef = ref(db);
+
+
+
+var database = await get(dbRef).then((snapshot) => {
+        return snapshot.val()
+})
+
+console.log(database)
+
+function getData(dataRef, dataIndex) {
+    return tmp = get(child(dataRef, dataIndex)).then((snapshot) => {
+        if (snapshot.exists()) {
+            return snapshot.val()
+        } else {
+            return "No data available";
+        }
+    });
 }
-
-var dataString = loadFile("../json/database.json")
-
-var database = JSON.parse(dataString)
+//===============================================
 var places = database.filter((el) => {
     return (el.category == "place")
 })
@@ -37,9 +76,14 @@ var des = document.getElementsByClassName("description")[0]
 var body = document.getElementsByTagName("body")[0]
 var defaultBg = "https://icdn.dantri.com.vn/2021/04/28/ubnd-tp-1619582754877.jpg"
 
+
+
+if (!isNaN(tmp))
+    count = tmp - places.length;
+
 function changeData(i){
     
-    num.innerText = "#" + (database[i].id - places.length)
+    num.innerText = "#" + (database[i].id - places.length + 1)
     name1.innerText = database[i].name
     des.innerText = database[i].description
     body.setAttribute("style", "  background: linear-gradient(black, rgba(0,0,0,0.6)), url(" + database[i].bgLink +");background-size: cover;background-repeat: no-repeat;background-attachment:fixed;")

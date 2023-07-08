@@ -3,28 +3,61 @@ var idPos = curURL.search("id=")
 console.log(idPos)
 var tmp = Number(curURL.slice(idPos + 3, curURL.length))
 var count = 0
-if (!isNaN(tmp))
-    count = tmp - 1;
 
 
-function loadFile(filePath) {
-    var result = null;
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", filePath, false);
-    xmlhttp.send();
-    if (xmlhttp.status==200) {
-        result = xmlhttp.responseText;
-    }
-    return result;
+//========================================================================
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js";
+import { getDatabase, ref, set, onValue, get, child } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-database.js";
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAtwPhCdCQLf2TVE0AmsI6LJA5DOsch8Qo",
+    authDomain: "saigon-location.firebaseapp.com",
+    projectId: "saigon-location",
+    storageBucket: "saigon-location.appspot.com",
+    messagingSenderId: "297373622656",
+    appId: "1:297373622656:web:ffdc04efb1039220ab2165"
+  };
+
+// Initialize Firebase
+var app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const dbRef = ref(db);
+
+
+
+var database = await get(dbRef).then((snapshot) => {
+        return snapshot.val()
+})
+
+console.log(database)
+
+function getData(dataRef, dataIndex) {
+    return tmp = get(child(dataRef, dataIndex)).then((snapshot) => {
+        if (snapshot.exists()) {
+            return snapshot.val()
+        } else {
+            return "No data available";
+        }
+    });
 }
 
-var dataString = loadFile("./json/database.json")
 
-var database = JSON.parse(dataString)
+// console.log((await getData(dbRef, '0')).name)
+//==========================================
 
+
+var foods = database.filter((el) => {
+    return (el.category == "food")
+})
 database = database.filter((el) => {
     return (el.category == "place")
 })
+
+
+
+if (!isNaN(tmp))
+    count = tmp - foods.length;
 
 console.log(database)
 var num = document.getElementsByClassName("number")[0]
@@ -35,7 +68,7 @@ var defaultBg = "https://icdn.dantri.com.vn/2021/04/28/ubnd-tp-1619582754877.jpg
 
 function changeData(i){
     
-    num.innerText = "#" + database[i].id
+    num.innerText = "#" + database[i].id 
     name1.innerText = database[i].name
     des.innerText = database[i].description
     body.setAttribute("style", "  background: linear-gradient(black, rgba(0,0,0,0.6)), url(" + database[i].bgLink +");background-size: cover;background-repeat: no-repeat;background-attachment:fixed;")
@@ -74,3 +107,5 @@ prevButton.onclick = () =>{
     changeData(count)
 }
 // =====================================================================
+
+

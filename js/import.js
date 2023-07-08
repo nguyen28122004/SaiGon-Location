@@ -1,25 +1,3 @@
-var body = document.getElementsByTagName("body")[0]
-
-body.setAttribute("style", "background-image: linear-gradient(black, rgba(0,0,0,0.6)), url(https://divui.com/blog/wp-content/uploads/2018/10/saigon.jpg); background-size: cover;background-repeat: no-repeat;background-attachment:fixed;")
-
-
-// function loadFile(filePath) {
-//     var result = null;
-//     var xmlhttp = new XMLHttpRequest();
-//     xmlhttp.open("GET", filePath, false);
-//     xmlhttp.send();
-//     if (xmlhttp.status==200) {
-//       result = xmlhttp.responseText;
-//     }
-//     return result;
-// }
-
-// dataString = loadFile('../json/database.json')
-var searchContainer = document.getElementsByClassName('search-container')[0]
-
-// database  = JSON.parse(dataString)
-
-//================================================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js";
 import { getDatabase, ref, set, onValue, get, child } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-database.js";
 
@@ -55,7 +33,15 @@ function getData(dataRef, dataIndex) {
         }
     });
 }
-//==================================================
+//==================================
+var body = document.getElementsByTagName("body")[0]
+var defaultBg = "https://icdn.dantri.com.vn/2021/04/28/ubnd-tp-1619582754877.jpg"
+
+body.setAttribute("style", "  background: linear-gradient(black, rgba(0,0,0,0.6)), url(" + defaultBg +");background-size: cover;background-repeat: no-repeat;background-attachment:fixed;")
+/////////////////////=============================================
+
+var searchContainer = document.getElementsByClassName('search-container')[0]
+
 for (let i = 0; i < database.length; i++) {
     const element = database[i];
     var newInfoBox = document.createElement("div")
@@ -86,42 +72,59 @@ for (let i = 0; i < database.length; i++) {
     newTextInfo.appendChild(newSearchDescription)
     
     
+    var newTrashIcon = document.createElement("i")
+    newTrashIcon.setAttribute("class", "fa-solid fa-trash")
+
+    newTrashIcon.classList.add("remove")
 
     newInfoBox.appendChild(newImg)
     newInfoBox.appendChild(newTextInfo)
+    newInfoBox.appendChild(newTrashIcon)
 
     searchContainer.appendChild(newInfoBox)
 }
+//=================================================
 
-var searchBar = document.getElementsByTagName("input")[0]
-var infoBox = document.getElementsByClassName("info-box")
 
-searchBar.oninput = () => {
-  console.log(searchBar.value)
-  for (let i = 0; i < database.length; i++) {
-    console.log(database[i].name.includes(searchBar.value))
-    if (!database[i].name.toLowerCase().includes(searchBar.value.toLowerCase()) && !infoBox[i].classList.contains('hidden')) {
-      infoBox[i].classList.toggle("hidden")
-    }
-    else if(infoBox[i].classList.contains('hidden') && database[i].name.toLowerCase().includes(searchBar.value.toLowerCase()))
-    {
-      infoBox[i].classList.toggle("hidden")
-    }
-  }
+
+
+
+var submit_button = document.getElementsByClassName("submit-box")[0]
+
+submit_button.onclick = () => {
+
+    var data = {
+        "id": database.length + 1,
+        "category": document.getElementById("category").value,
+        "name": document.getElementById("name").value,
+        "address": document.getElementById("address").value,
+        "rate": document.getElementById("rate").value,
+        "description": document.getElementById("description").value,
+        "bgLink": document.getElementById("bgLink").value
+    };
+    
+
+    database.push(data)
+    console.log(database)
+    set(dbRef, database)
 }
 
-var id_page = 0
 
-for (let i = 0; i < infoBox.length; i++) {
-  const e = infoBox[i];
-  e.onclick = () => {
-    if(database[i].category == "place")
-      window.location.replace(".././index.html?id=" + (i + 1))
-    else if(database[i].category == "food")
-    {
-      window.location.replace("../html/food.html?id=" + (i + 1))
+
+var removeIcon = document.getElementsByClassName("remove")
+
+console.log(removeIcon.length)
+for (let i = 0; i < removeIcon.length; i++) {
+    const e = removeIcon[i];
+    e.onclick = () => {
+        database.splice(i, 1);
+        console.log(database)
+        for (let j = i; j < database.length; j++) {
+            const e = database[j];
+            database[j].id = database[j].id - 1;
+        }
+        set(dbRef, database)
+        window.location.reload();
     }
+    
   }
-  
-}
-
