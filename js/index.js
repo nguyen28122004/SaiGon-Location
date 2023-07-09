@@ -1,25 +1,9 @@
 var body = document.getElementsByTagName("body")[0]
+var defaultBg = "https://icdn.dantri.com.vn/2021/04/28/ubnd-tp-1619582754877.jpg"
 
-body.setAttribute("style", "background-image: linear-gradient(black, rgba(0,0,0,0.6)), url(https://divui.com/blog/wp-content/uploads/2018/10/saigon.jpg); background-size: cover;background-repeat: no-repeat;background-attachment:fixed;")
+body.setAttribute("style", "  background: linear-gradient(black, rgba(0,0,0,0.6)), url(" + defaultBg +");background-size: cover;background-repeat: no-repeat;background-attachment:fixed;")
 
-
-// function loadFile(filePath) {
-//     var result = null;
-//     var xmlhttp = new XMLHttpRequest();
-//     xmlhttp.open("GET", filePath, false);
-//     xmlhttp.send();
-//     if (xmlhttp.status==200) {
-//       result = xmlhttp.responseText;
-//     }
-//     return result;
-// }
-
-// dataString = loadFile('../json/database.json')
-var searchContainer = document.getElementsByClassName('search-container')[0]
-
-// database  = JSON.parse(dataString)
-
-//================================================
+///==================================================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js";
 import { getDatabase, ref, set, onValue, get, child } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-database.js";
 
@@ -56,15 +40,18 @@ function getData(dataRef, dataIndex) {
     });
 }
 //==================================================
+
+var searchContainer = document.getElementsByClassName('new-destinations-list')[0]
+
+
 for (let i = 0; i < database.length; i++) {
     const element = database[i];
     var newInfoBox = document.createElement("div")
-    newInfoBox.setAttribute("class","info-box")
+    newInfoBox.setAttribute("class","new-destination")
     newInfoBox.setAttribute("data-id", "data" + database[i].id)
 
-    var newImg = document.createElement("img")
-    newImg.setAttribute("src", database[i].bgLink)
-    newImg.setAttribute("class", "checkin")
+    
+    newInfoBox.style = "background: url(" + database[i].bgLink+ "), rgba(0,0,0,0.5);"
 
     var newTextInfo = document.createElement("div")
     newTextInfo.setAttribute("class", "text-info")
@@ -85,43 +72,10 @@ for (let i = 0; i < database.length; i++) {
     newTextInfo.appendChild(newAddress)
     newTextInfo.appendChild(newSearchDescription)
     
-    
-
-    newInfoBox.appendChild(newImg)
+    var newOverlay = document.createElement("div")
+    newOverlay.setAttribute("class", "overlayBox")
+    newInfoBox.appendChild(newOverlay)
     newInfoBox.appendChild(newTextInfo)
 
     searchContainer.appendChild(newInfoBox)
 }
-
-var searchBar = document.getElementsByTagName("input")[0]
-var infoBox = document.getElementsByClassName("info-box")
-
-searchBar.oninput = () => {
-  console.log(searchBar.value)
-  for (let i = 0; i < database.length; i++) {
-    console.log(database[i].name.includes(searchBar.value))
-    if (!database[i].name.toLowerCase().includes(searchBar.value.toLowerCase()) && !infoBox[i].classList.contains('hidden')) {
-      infoBox[i].classList.toggle("hidden")
-    }
-    else if(infoBox[i].classList.contains('hidden') && database[i].name.toLowerCase().includes(searchBar.value.toLowerCase()))
-    {
-      infoBox[i].classList.toggle("hidden")
-    }
-  }
-}
-
-var id_page = 0
-
-for (let i = 0; i < infoBox.length; i++) {
-  const e = infoBox[i];
-  e.onclick = () => {
-    if(database[i].category == "place")
-      window.location.replace("../html/place.html?id=" + (i + 1))
-    else if(database[i].category == "food")
-    {
-      window.location.replace("../html/food.html?id=" + (i + 1))
-    }
-  }
-  
-}
-

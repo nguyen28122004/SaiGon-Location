@@ -79,11 +79,11 @@ var defaultBg = "https://icdn.dantri.com.vn/2021/04/28/ubnd-tp-1619582754877.jpg
 
 
 if (!isNaN(tmp))
-    count = tmp - places.length;
+    count = tmp - places.length - 1;
 
 function changeData(i){
     
-    num.innerText = "#" + (database[i].id - places.length + 1)
+    num.innerText = "#" + (database[i].id - places.length)
     name1.innerText = database[i].name
     des.innerText = database[i].description
     body.setAttribute("style", "  background: linear-gradient(black, rgba(0,0,0,0.6)), url(" + database[i].bgLink +");background-size: cover;background-repeat: no-repeat;background-attachment:fixed;")

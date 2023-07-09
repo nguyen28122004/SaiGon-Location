@@ -106,6 +106,11 @@ submit_button.onclick = () => {
 
     database.push(data)
     console.log(database)
+    database.sort((a, b) => (a.category <= b.category) ? 1: -1)
+    for (let i = 0; i < database.length; i++) {
+        const el = database[i];
+        el.id = i + 1;
+    }
     set(dbRef, database)
 }
 
