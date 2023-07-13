@@ -94,7 +94,7 @@ if(document.getElementsByClassName('new-destinations-list').length > 0)
         setClick()
         //real action
     }
-    
+    setClick()
     wait4setClick();
 
     function setClick(){

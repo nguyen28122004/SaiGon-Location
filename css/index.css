@@ -202,36 +202,109 @@ nav:hover
   background-position: center center;
 }
 
+
 @media only screen and (max-width: 900px)
 {
   nav
   {
     position: relative;
+    opacity: 1;
+    font-size: 0.6rem;
+    margin-bottom: 10px;
   }
   nav:hover
   {
     position: relative;
     opacity: 1;
   }
+  .nav-links ul li
+  {
+    list-style: none;
+    display: inline-block;
+    margin-right:5px;
+  }
   .search-description
   {
-    display: none;
+    display: -webkit-box;
   }
   .contain-box
   {
-    flex-direction: column;
-    padding: 0px;
+    flex-direction: column-reverse;
+    width: 95%;
   }
   .box
   {
     width: 100%;
-    height: 100%;
   }
-  .box.right-box
+  .primary-content
   {
-    height: 70vw;
-    background: url('../logoProject.jpg');
-    background-size: cover;
-    background-position: center center;
+    width: 90%;
+    height: auto;
   }
+  .description{
+    width: 95%;
+  }
+  .fa{
+    opacity: 1;
+    height: 10vh;
+    width: 100%;
+  }
+  .fa:hover, .primary-content:hover + .fa
+  {
+    opacity: 1;
+  }
+  .fa
+  {
+    display: flex !important;
+    flex-direction: row-reverse;
+    align-items: center;
+  }
+  .fa-solid
+  {
+    color: var(--primary-text-color);
+    background-color: rgba(255, 255, 255, 0.2);
+    border: #fff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: inline-flex !important;
+    align-items: center;
+    flex-direction: column-reverse !important;
+    justify-content: row;
+    cursor: pointer;
+  }
+  .fa .fa-angle-right
+  {
+    position: relative;
+    display: inline-flex !important;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+  }
+  .fa .fa-angle-left
+  {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    display: inline-flex !important;
+    margin-right: auto;
+  }
+  .text-info
+  {
+    padding-left: 20px;
+  }
+  .search-description
+  {
+      font-size: 0.8rem !important;
+      max-width: 95%;
+      margin: 0px;
+      padding: 0px;
+      font-size: 0.9rem;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 6;
+      overflow: hidden;
+  }
+
+
 }

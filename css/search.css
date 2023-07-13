@@ -23,11 +23,20 @@
   nav
   {
     position: relative;
+    opacity: 1;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
   }
   nav:hover
   {
     position: relative;
     opacity: 1;
+  }
+  .nav-links ul li
+  {
+    list-style: none;
+    display: inline-block;
+    margin-right: 10px;
   }
   .search-description
   {
@@ -36,9 +45,63 @@
   .contain-box
   {
     flex-direction: column-reverse;
+    width: 95%;
   }
   .box
   {
     width: 100%;
+  }
+  .primary-content
+  {
+    width: 90%;
+    height: auto;
+  }
+  .description{
+    width: 95%;
+  }
+  .fa{
+    opacity: 1;
+    height: 10vh;
+    width: 100%;
+  }
+  .fa:hover, .primary-content:hover + .fa
+  {
+    opacity: 1;
+  }
+  .fa
+  {
+    display: flex !important;
+    flex-direction: row-reverse;
+    align-items: center;
+  }
+  .fa-solid
+  {
+    color: var(--primary-text-color);
+    background-color: rgba(255, 255, 255, 0.2);
+    border: #fff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: inline-flex !important;
+    align-items: center;
+    flex-direction: column-reverse !important;
+    justify-content: row;
+    cursor: pointer;
+  }
+  .fa .fa-angle-right
+  {
+    position: relative;
+    display: inline-flex !important;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+  }
+  .fa .fa-angle-left
+  {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    display: inline-flex !important;
+    margin-right: auto;
   }
 }
