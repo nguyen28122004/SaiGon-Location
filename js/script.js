@@ -30,7 +30,7 @@ var database = await get(dbRef).then((snapshot) => {
         return snapshot.val()
 })
 
-console.log(database)
+// console.log(database)
 
 function getData(dataRef, dataIndex) {
     return tmp = get(child(dataRef, dataIndex)).then((snapshot) => {
@@ -57,7 +57,7 @@ database = database.filter((el) => {
 
 
 if (!isNaN(tmp))
-    count = tmp - foods.length;
+    count = tmp - 1;
 
 console.log(database)
 var num = document.getElementsByClassName("number")[0]
@@ -67,7 +67,7 @@ var body = document.getElementsByTagName("body")[0]
 var defaultBg = "https://icdn.dantri.com.vn/2021/04/28/ubnd-tp-1619582754877.jpg"
 
 function changeData(i){
-    
+    console.log(i)
     num.innerText = "#" + database[i].id 
     name1.innerText = database[i].name
     des.innerText = database[i].description
@@ -109,3 +109,4 @@ prevButton.onclick = () =>{
 // =====================================================================
 
 
+//================New fav item=======================

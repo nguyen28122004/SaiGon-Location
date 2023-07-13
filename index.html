@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAIGON LOCATION</title>
     <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/auth.css">
     <link rel="shortcut icon" href="./icon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script crossorigin  type="module" src="https://unpkg.com/react@18/umd/react.development.js"></script>
@@ -24,11 +25,89 @@
             </ul>
         </div>
     </nav>
+    <button class="signout">Đăng xuất</button>
     
     <div class="new-destinations-list">
     </div>
+
+
+    <!-- ĐĂNG NHẬP ĐĂNG XUẤT -->
+    <div class="registration">
+        <div class="signin">
+            <div class="auth-title">Đăng nhập</div>
+            <div class="form-sign">
+                <p>Tên đăng nhập (Email)</p>
+                <input type="text" name="Email" id="email-signin">
+                <p>Mật khẩu</p>
+                <input type="password" name="Password" id="password-signin">
+                <p class="error-message"></p>
+                <button id="signin-submit">Sign in</button>
+            </div>
+        </div>
+
+
+
+        <div class="signup hidden">
+            <div class="auth-title">Đăng kí</div>
+            <div class="form-sign">
+                <p>Tên đăng nhập (Email)</p>
+                <input type="text" name="Email" id="email-signup">
+                <p>Mật khẩu</p> 
+                <input type="password" name="Password" id="password-signup">
+                <p>Nhập lại mật khẩu</p>
+                <input type="password" name="Password" id="re-password-signup">
+                <p class="error-message"></p>
+                <button id="signup-submit">Sign up</button>
+            </div>
+        </div>
+        
+        <div class="toggle-button">
+            <div class="toggle button-signin form-color">Đăng nhập</div>
+            <div class="toggle button-signup">Đăng kí</div>
+        </div>
+    </div>
+
+
+    <!-- FAV LIST -->
+    <div class="fav hidden" style="display: flex;flex-direction:column;align-items: center;">
+        
+        <div class="divider" style="height: 1px;width: 80%;background-color: #ffffffa9;margin-top: 30px;"></div>
+        <p style="font-size: 1.5rem;">ĐỊA ĐIỂM YÊU THÍCH</p>
+        <div class="fav-list">
+        </div>
+
+    </div>
+
+    <!-- Giới thiệu -->
+    <div class="divider" style="height: 1px;width: 60%;background-color: #ffffffa9;margin-top: 30px;"></div>
+    <p style="font-size: 1.5rem;">SAIGON LOCATION</p>
+    <div class="contain-box">
+
+        <div class="box left-box">
+            <div class="description_us">
+                <p>
+                    <b>SAIGON - LOCATION</b> là một dự án nhằm mục đích quảng bá văn hóa và các di tích lịch sử, địa điểm du lịch ở Sài Gòn. Đó có thể là một công trình lớn (Nhà Thờ Đức Bà, Dinh Độc Lập…) hay chỉ là một quán cafe ở công hoặc một quán ăn nằm trong con hẻm. Với các tiêu chí lựa chọn cụ thể:
+                    <ul>
+                        <li><i>Quen thuộc và là thế mạnh của thành phố</i></li>
+                        <li><i>Tập trung vào trải nghiệm và chất lượng hơn danh tiếng</i></li>
+                        <li><i>Mới lạ với khách du lịch</i></li>
+                    </ul>Song song đó, chúng tôi xây dựng nên một cách thức giao tiếp dễ dàng nhằm xóa bỏ rào cản ngôn ngữ gắn kết mọi người cùng nhau.
+                </p>
+            </div>
+            
+            <div class="contact-box">
+                <p class="email"><strong>Email: saigonlocation30@gmail.com</strong></p>
+                <p class="address"><strong>Địa chỉ: Đại học Văn Lang</strong></p>
+            </div>
+        </div>
+        
+        <div class="box right-box" autocomplete="off">
+        </div>
+    </div>
 </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+<script type="module" src="./js/auth.js"></script>
 <script type="module" src="./js/index.js"></script>
 </body>
 </html>

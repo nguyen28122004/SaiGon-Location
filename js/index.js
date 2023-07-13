@@ -28,7 +28,7 @@ var database = await get(dbRef).then((snapshot) => {
         return snapshot.val()
 })
 
-console.log(database)
+
 
 function getData(dataRef, dataIndex) {
     return tmp = get(child(dataRef, dataIndex)).then((snapshot) => {
@@ -41,41 +41,106 @@ function getData(dataRef, dataIndex) {
 }
 //==================================================
 
-var searchContainer = document.getElementsByClassName('new-destinations-list')[0]
+if(document.getElementsByClassName('new-destinations-list').length > 0)
+{
 
-
-for (let i = 0; i < database.length; i++) {
-    const element = database[i];
-    var newInfoBox = document.createElement("div")
-    newInfoBox.setAttribute("class","new-destination")
-    newInfoBox.setAttribute("data-id", "data" + database[i].id)
-
+    var searchContainer = document.getElementsByClassName('new-destinations-list')[0]
     
-    newInfoBox.style = "background: url(" + database[i].bgLink+ "), rgba(0,0,0,0.5);"
+    for (let i = 0; i < database.length; i++) {
+        const element = database[i];
+        var newInfoBox = document.createElement("div")
+        newInfoBox.setAttribute("class","new-destination")
+        newInfoBox.setAttribute("data-id", "data" + database[i].id)
+        
+        
+        newInfoBox.style = "background: url(" + database[i].bgLink+ "), rgba(0,0,0,0.5);"
+        
+        var newTextInfo = document.createElement("div")
+        newTextInfo.setAttribute("class", "text-info")
+        
+        var newDestination = document.createElement("div")
+        newDestination.setAttribute("class", "destination")
+        newDestination.innerText = database[i].name
+        
+        var newAddress = document.createElement("div")
+        newAddress.setAttribute("class", "address")
+        newAddress.innerText = database[i].newAddress
 
-    var newTextInfo = document.createElement("div")
-    newTextInfo.setAttribute("class", "text-info")
+        var newSearchDescription = document.createElement("div")
+        newSearchDescription.setAttribute("class", "search-description")
+        newSearchDescription.innerText = database[i].description
+        
+        newTextInfo.appendChild(newDestination)
+        newTextInfo.appendChild(newAddress)
+        newTextInfo.appendChild(newSearchDescription)
+        
+        var newOverlay = document.createElement("div")
+        newOverlay.setAttribute("class", "overlayBox")
+        newInfoBox.appendChild(newOverlay)
+        newInfoBox.appendChild(newTextInfo)
+        
+        searchContainer.appendChild(newInfoBox)
+    }
 
-    var newDestination = document.createElement("div")
-    newDestination.setAttribute("class", "destination")
-    newDestination.innerText = database[i].name
 
-    var newAddress = document.createElement("div")
-    newAddress.setAttribute("class", "address")
-    newAddress.innerText = database[i].newAddress
+    var box = $('.new-destination');
 
-    var newSearchDescription = document.createElement("div")
-    newSearchDescription.setAttribute("class", "search-description")
-    newSearchDescription.innerText = database[i].description
-
-    newTextInfo.appendChild(newDestination)
-    newTextInfo.appendChild(newAddress)
-    newTextInfo.appendChild(newSearchDescription)
+    function wait4setClick() {
+        if(box.length <= database.length) {
+            box = $('.new-destination');
+            setTimeout(wait4setClick, 50);//wait 50 millisecnds then recheck
+            return;
+        }
+        setClick()
+        //real action
+    }
     
-    var newOverlay = document.createElement("div")
-    newOverlay.setAttribute("class", "overlayBox")
-    newInfoBox.appendChild(newOverlay)
-    newInfoBox.appendChild(newTextInfo)
+    wait4setClick();
 
-    searchContainer.appendChild(newInfoBox)
+    function setClick(){
+
+        box.click(function (e) { 
+            e = $(e.currentTarget)
+            let name = e.children('.text-info').children('.destination').text()
+            console.log(e)
+            
+            var currentItem = database.filter(e => {
+                return e.name == name
+            })
+            if(currentItem[0].category == 'food')
+            {
+                window.location.replace("../html/food.html?id=" + currentItem[0].id)
+            }
+            else if(currentItem[0].category == 'place')
+            {
+                window.location.replace("../html/place.html?id=" + currentItem[0].id)
+            }
+            console.log(currentItem[0].category)
+        });
+    }
+
+
 }
+
+
+
+
+
+//   window.addEventListener("wheel", e => {
+//     console.info(e.deltaY)
+//     if (e.deltaY > 0) searchContainer.scrollLeft += document.getElementsByClassName('new-destination')[0].clientWidth;
+//     else searchContainer.scrollLeft -= document.getElementsByClassName('new-destination')[0].clientWidth;
+//   });
+
+
+
+
+//DATA NGƯỜI DÙNG
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+
+
+export {database};

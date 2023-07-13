@@ -1,0 +1,44 @@
+.main{
+  display: flex;
+  flex-direction: column;
+}
+
+.fa-solid
+{
+  background: none;
+  border: none;
+  width: auto;
+  height: auto;
+  border-radius: none;
+  display: unset;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 900px)
+{
+  nav
+  {
+    position: relative;
+  }
+  nav:hover
+  {
+    position: relative;
+    opacity: 1;
+  }
+  .search-description
+  {
+    display: none;
+  }
+  .contain-box
+  {
+    flex-direction: column-reverse;
+  }
+  .box
+  {
+    width: 100%;
+  }
+}

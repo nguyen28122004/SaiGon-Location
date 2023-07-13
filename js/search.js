@@ -77,6 +77,8 @@ for (let i = 0; i < database.length; i++) {
     newAddress.setAttribute("class", "address")
     newAddress.innerText = database[i].newAddress
 
+    
+
     var newSearchDescription = document.createElement("div")
     newSearchDescription.setAttribute("class", "search-description")
     newSearchDescription.innerText = database[i].description
@@ -93,8 +95,19 @@ for (let i = 0; i < database.length; i++) {
     searchContainer.appendChild(newInfoBox)
 }
 
+jQuery('<div>', {
+  class: 'fa',
+  style: 'font-size:1.9rem; cursor:pointer;z-index:1;height:100%'
+}).appendTo('.info-box');
+
+
+jQuery('<i>', {
+  class: 'fa-regular fa-bookmark',
+  style: 'font-size:1.9rem; cursor:pointer;z-index:-1'
+}).appendTo('.fa');
+
 var searchBar = document.getElementsByTagName("input")[0]
-var infoBox = document.getElementsByClassName("info-box")
+var infoBox = document.querySelectorAll(".info-box")
 
 searchBar.oninput = () => {
   console.log(searchBar.value)
@@ -111,7 +124,7 @@ searchBar.oninput = () => {
 }
 
 var id_page = 0
-
+infoBox = document.getElementsByClassName('text-info')
 for (let i = 0; i < infoBox.length; i++) {
   const e = infoBox[i];
   e.onclick = () => {
@@ -122,6 +135,112 @@ for (let i = 0; i < infoBox.length; i++) {
       window.location.replace("../html/food.html?id=" + (i + 1))
     }
   }
-  
 }
+
+infoBox = document.getElementsByClassName('checkin')
+for (let i = 0; i < infoBox.length; i++) {
+  const e = infoBox[i];
+  e.onclick = () => {
+    if(database[i].category == "place")
+      window.location.replace("../html/place.html?id=" + (i + 1))
+    else if(database[i].category == "food")
+    {
+      window.location.replace("../html/food.html?id=" + (i + 1))
+    }
+  }
+}
+// =====================================HAV BOOK MARK====================
+
+import * as favLists from '../js/fav.js'
+import * as authdata from '../js/authdata.js'
+
+var favList = favLists.fav[authdata.user].fav
+console.log(favList)
+var bookmarkIconList = $('.fa')
+var place_name = $('.destination')
+infoBox = $('.info-box')
+
+
+
+const firebaseConfig1 = {
+  apiKey: "AIzaSyB9-jpTaoujMtG_FagHC7iKtANSSFplDyk",
+  authDomain: "saigon-travel-aaabc.firebaseapp.com",
+  databaseURL: "https://saigon-travel-aaabc-default-rtdb.firebaseio.com",
+  projectId: "saigon-travel-aaabc",
+  storageBucket: "saigon-travel-aaabc.appspot.com",
+  messagingSenderId: "1009873491491",
+  appId: "1:1009873491491:web:0c6a5e9bc86484b13a0396"
+};
+
+// Initialize fav Firebase
+const app1 = initializeApp(firebaseConfig1, 'fav_list');
+
+const db1 = getDatabase(app1);
+const dbRef1 = ref(db1);
+
+var favList1 = await get(dbRef1).then((snapshot) => {
+  return snapshot.val()
+})
+
+console.log(favList1)
+
+
+
+
+
+
+
+bookmarkIconList.click( function(e) {
+  e = $(e.currentTarget).parent().children('.fa')
+  console.log(e)
+  let name = e.parent().children('.text-info').children('.destination')
+  console.log(name.text());
+
+
+  if(e.children().hasClass('fa-regular'))
+  {
+    favList1[authdata.user].fav.push(name.text())
+    e.html( "<i class=\"fa-solid fa-bookmark\"></i>")
+    console.log(favList1);
+  }
+    else
+    {
+      let pos = favList1[authdata.user].fav.indexOf(name.text())
+      if(pos > -1)
+      {
+        favList1[authdata.user].fav.splice(pos, 1)
+        e.html("<i class=\"fa-regular fa-bookmark\"></i>")
+        console.log(favList1)
+      }
+    }
+  
+    set(dbRef1, favList1)
+})
+
+function updateBookmark()
+{
+  for (let i = 0; i < place_name.length; i++) {
+    for(let j = 0; j < favList.length; j++)
+    {
+      if(place_name[i].innerText == favList[j])
+      {
+        let e = infoBox.children('.fa')
+
+        if(e.children()[i].classList.contains('fa-regular'))
+          e[i].innerHTML = "<i class=\"fa-solid fa-bookmark\"></i>"
+        else
+          e[i].innerHTML = "<i class=\"fa-regular fa-bookmark\"></i>"
+      }
+    }
+    
+  }
+}
+
+
+
+
+
+
+updateBookmark()
+
 

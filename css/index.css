@@ -141,7 +141,7 @@ nav:hover
     max-height: 90%;
     width: 100%;
     height: 100%;
-    padding-left: 25px;
+    padding-left: 55px;
     box-sizing: content-box;
     overflow: hidden;
     white-space: break-spaces;
@@ -154,7 +154,7 @@ nav:hover
 }
 .address
 {
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-style: italic;
 }
 .search-description
@@ -163,9 +163,75 @@ nav:hover
     max-width: 95%;
     margin: 0px;
     padding: 0px;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 11;
     overflow: hidden;
+}
+
+
+.contain-box
+{
+  width: 70%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.363);
+  border-radius: 10px;
+  padding: 0;
+  display: flex;
+  margin-bottom: 30px;
+  padding-left: 15px;
+}
+
+.box
+{
+  width: 50%;
+  height: 60%;
+  background-color: none;
+  margin: 0px;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 30px;
+  color: var(--primary-text-color);
+}
+.box.right-box
+{
+  height: auto;
+  background: url('../logoProject.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+
+@media only screen and (max-width: 900px)
+{
+  nav
+  {
+    position: relative;
+  }
+  nav:hover
+  {
+    position: relative;
+    opacity: 1;
+  }
+  .search-description
+  {
+    display: none;
+  }
+  .contain-box
+  {
+    flex-direction: column;
+    padding: 0px;
+  }
+  .box
+  {
+    width: 100%;
+    height: 100%;
+  }
+  .box.right-box
+  {
+    height: 70vw;
+    background: url('../logoProject.jpg');
+    background-size: cover;
+    background-position: center center;
+  }
 }

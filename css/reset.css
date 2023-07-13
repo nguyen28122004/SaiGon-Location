@@ -43,50 +43,52 @@ body
   display: flex;
   left: 10%;
 }
+.main{
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: auto;
+  align-items: center;
+}
 nav
 {
-  position: relative;
-  width: 100vw;
-  opacity: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  pointer-events:all;
-  transition: all 0.5s ease;
-  transform: translate(-20px, 10px);
-  z-index: 1;
+width: 100vw;
+opacity: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+pointer-events:all;
+transition: all 0.5s ease;
+z-index: 1;
 }
 
 nav:hover
 {
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  pointer-events: auto;
-  transform: translate(-20px, 0px);
-  opacity: 1;
+width: 100vw;
+display: flex;
+align-items: center;
+justify-content: center;
+pointer-events: auto;
+opacity: 1;
 }
 .nav-links ul li
 {
-  list-style: none;
-  display: inline-block;
-  margin-left: 20px;
+list-style: none;
+display: inline-block;
+margin-right: 20px;
 }
 
 .nav-links ul li a
 {
-  color: var(--primary-text-color);
-  text-decoration-color: transparent;
-  border-bottom: solid 1px transparent;
-  transition: border-bottom 0.5s ease;
+color: #fff;
+text-decoration-color: transparent;
+border-bottom: solid 1px transparent;
+transition: border-bottom 0.5s ease;
 }
 
 .nav-links ul li a:hover
 {
-  border-bottom: solid 1px white;
+border-bottom: solid 1px white;
 }
 
 input, textarea, select
@@ -206,11 +208,6 @@ textarea::-webkit-scrollbar-thumb
   font-size: min(3vw, 4rem);
   color: var(--primary-text-color);
   font-family: 'Bodoni Moda', serif;
-  position: absolute;
-  top: 10%;
-  transform: translateY(-10%);
-  left: 50%;
-  transform: translateX(-50%);
   font-weight: 100;
   letter-spacing: 9px;
 }
@@ -219,7 +216,6 @@ textarea::-webkit-scrollbar-thumb
   width: 80%;
   height: 60%;
   background: rgba(255, 255, 255, 0.048);
-  position: absolute;
   top: 30%;
   right: 10%;
   border-radius: 10px;
@@ -264,20 +260,24 @@ textarea::-webkit-scrollbar-thumb
 
 .search-container
 {
+  margin-top: 20px;
   position: relative;
   width: 90%;
-  top: 10%;
-  left: 5%;
-  display: flex-box;
+  display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+}
+
+.search-bar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 input#search
 {
   width: 50%;
   position: relative;
-  left: 25%;
   padding: 0 10px;
 }
 
@@ -341,8 +341,25 @@ img.checkin
 
 @media only screen and (max-width: 900px)
 {
+  nav
+  {
+    position: relative;
+  }
+  nav:hover
+  {
+    position: relative;
+    opacity: 1;
+  }
   .search-description
   {
     display: none;
+  }
+  .contain-box
+  {
+    flex-direction: column-reverse;
+  }
+  .box
+  {
+    width: 100%;
   }
 }
