@@ -124,7 +124,6 @@ if(document.getElementsByClassName('new-destinations-list').length > 0)
 
 
 $('.fa-angle-right').click(function (e) { 
-    
     searchContainer.scrollLeft += document.getElementsByClassName('new-destination')[0].clientWidth
     
 });
