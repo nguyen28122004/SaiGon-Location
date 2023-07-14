@@ -92,7 +92,6 @@ nav:hover
 {
     top: 15px;
     white-space: nowrap;
-    overflow-x: scroll;
 
     position: relative;
     
@@ -203,6 +202,39 @@ nav:hover
   background-position: center center;
 }
 
+
+
+.fav-list
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.fav-list .new-destination
+{
+    display: flex;
+    margin-top: 30px;
+    white-space: nowrap;
+    overflow-x: none;
+    position: relative;
+    
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    
+    
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.fav-list .new-destination:last-child
+{
+    margin-bottom: 50px
+}
+
+
+.fav-list .text-info
+{
+    padding-bottom: 25px;
+}
 
 .fa
 {
