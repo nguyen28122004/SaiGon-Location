@@ -45,7 +45,7 @@ if(document.getElementsByClassName('new-destinations-list').length > 0)
 {
 
     var searchContainer = document.getElementsByClassName('new-destinations-list')[0]
-    
+
     for (let i = 0; i < database.length; i++) {
         const element = database[i];
         var newInfoBox = document.createElement("div")
@@ -109,11 +109,11 @@ if(document.getElementsByClassName('new-destinations-list').length > 0)
             })
             if(currentItem[0].category == 'food')
             {
-                window.location.replace("../html/food.html?id=" + currentItem[0].id)
+                window.location.replace("./html/food.html?id=" + currentItem[0].id)
             }
             else if(currentItem[0].category == 'place')
             {
-                window.location.replace("../html/place.html?id=" + currentItem[0].id)
+                window.location.replace("./html/place.html?id=" + currentItem[0].id)
             }
             console.log(currentItem[0].category)
         });
@@ -123,15 +123,28 @@ if(document.getElementsByClassName('new-destinations-list').length > 0)
 }
 
 
+$('.fa-angle-right').click(function (e) { 
+    
+    searchContainer.scrollLeft += document.getElementsByClassName('new-destination')[0].clientWidth
+    
+});
 
+$('.fa-angle-left').click(function (e) { 
+    
+    searchContainer.scrollLeft -= document.getElementsByClassName('new-destination')[0].clientWidth
+    
+});
 
-
-//   window.addEventListener("wheel", e => {
-//     console.info(e.deltaY)
-//     if (e.deltaY > 0) searchContainer.scrollLeft += document.getElementsByClassName('new-destination')[0].clientWidth;
-//     else searchContainer.scrollLeft -= document.getElementsByClassName('new-destination')[0].clientWidth;
-//   });
-
+// document.getElementsByClassName('new-destinations-list')[0].onmouseover = () => {
+//     console.log(111)
+    
+//     window.addEventListener("wheel", e => {
+//         console.info(e.deltaY)
+//         if (e.deltaY > 0) searchContainer.scrollLeft += document.getElementsByClassName('new-destination')[0].clientWidth;
+//         else searchContainer.scrollLeft -= document.getElementsByClassName('new-destination')[0].clientWidth;
+//     });
+    
+// }
 
 
 

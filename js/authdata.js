@@ -1,5 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut  } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-auth.js";
+import { getAdditionalUserInfo, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut  } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-auth.js";
+import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-database.js";
+
 
 
 import * as places from './index.js'
@@ -147,24 +149,57 @@ function signOutUser()
           }).catch((error) => {
             // An error happened.
           });
-          
+          localStorage.setItem('user', undefined)
     }
 }
 
 
 function UserOnChange()
 {
-    onAuthStateChanged(auth, function (user1){
+    onAuthStateChanged(auth, async function (user1){
 
             if (user1) {
+                console.log(user1)
+                const firebaseConfig1 = {
+                    apiKey: "AIzaSyB9-jpTaoujMtG_FagHC7iKtANSSFplDyk",
+                    authDomain: "saigon-travel-aaabc.firebaseapp.com",
+                    databaseURL: "https://saigon-travel-aaabc-default-rtdb.firebaseio.com",
+                    projectId: "saigon-travel-aaabc",
+                    storageBucket: "saigon-travel-aaabc.appspot.com",
+                    messagingSenderId: "1009873491491",
+                    appId: "1:1009873491491:web:0c6a5e9bc86484b13a0396"
+                };
+
+                // Initialize Firebase
+                const app1 = initializeApp(firebaseConfig1, 'fav_list');
+
+                const db1 = getDatabase(app1);
+                const dbRef1 = ref(db1);
+
+                var favList = await get(dbRef1).then((snapshot) => {
+                    return snapshot.val()
+                })
+                
+
+                
                 $('.fav').toggleClass('hidden', false);
                 // console.log(user1)
                 $('.registration').toggleClass('hidden', true);
                 $('.signout').toggleClass('hidden', false);
+
+
+                if(user1.metadata.createdAt == user1.metadata.lastLoginAt && favList[user1.uid] == undefined)
+                {
+                    
+                    // console.log(user1)
+                    favList[user1.uid] = {fav:['']}
+                    set(dbRef1, favList)
+                    
+                }
+                favList = favList[user1.uid].fav
                 localStorage.setItem('user', user1.uid)
-                var favList = fav[user1.uid].fav;
                 var database = places.database;
-                // console.log(favList);
+                console.log(favList);
                 var datafav = new Array();
                 if (favList.length > 0)
                     for (let i = 0; i < favList.length; i++) {
@@ -175,7 +210,7 @@ function UserOnChange()
                             datafav.push(database[i]);
                         }
                     }
-                // console.log(datafav);
+                console.log(datafav);
                 if ($('.fav-list').length > 0)
                     createList(datafav, '.fav-list');
                 // ...
